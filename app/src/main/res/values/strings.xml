@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">WeatherForecast</string>
+
+    <!-- Preference Titles -->
+    <string name="theme_header">Theme</string>
+
+    <!-- Theme Preferences -->
+    <string name="theme_title">Select theme</string>
 </resources>
