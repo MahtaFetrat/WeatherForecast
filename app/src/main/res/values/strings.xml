@@ -1,11 +1,19 @@
 <resources>
     <string name="app_name">WeatherForecast</string>
 
-    <!-- Preference Titles -->
-    <string name="theme_header">Theme</string>
+    <!-- Location Input -->
+    <string name="set_location">Select location input type</string>
+    <string name="address">Address</string>
+    <string name="coordinates">Geographical Coordinates</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="address_hint">Enter address …</string>
 
-    <!-- Theme Preferences -->
+    <!-- Preferences -->
+    <string name="theme_header">Theme</string>
     <string name="theme_title">Select theme</string>
+
+    <!-- Navigation -->
     <string name="weather_nav_menu_title">Weather</string>
     <string name="settings_nav_menu_title">Settings</string>
 </resources>
