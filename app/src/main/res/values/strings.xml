@@ -6,4 +6,6 @@
 
     <!-- Theme Preferences -->
     <string name="theme_title">Select theme</string>
+    <string name="weather_nav_menu_title">Weather</string>
+    <string name="settings_nav_menu_title">Settings</string>
 </resources>
