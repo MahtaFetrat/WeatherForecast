@@ -11,8 +11,8 @@ public class WeatherForecastData {
         STORMY
     }
 
-    private int temperature;
-    private int temperatureFeel;
-    private int windSpeed;
-    private WeatherStatus weatherStatus;
+    int temperature;
+    int temperatureFeel;
+    int windSpeed;
+    WeatherStatus weatherStatus;
 }
