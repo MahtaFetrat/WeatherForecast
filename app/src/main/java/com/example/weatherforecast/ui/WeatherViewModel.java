@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.weatherforecast.model.GeographicCoordinates;
 import com.example.weatherforecast.model.WeatherForecastData;
 
 import java.util.List;
@@ -29,13 +28,13 @@ public class WeatherViewModel extends AndroidViewModel {
         return next10Days;
     }
 
-    public void setLocation(GeographicCoordinates coordinates) {
+    public void setLocation(float latitude, float longitude) {
         //asynchronously fetch data and set to livedata variables
         throw new NotImplementedError();
     }
 
-    public GeographicCoordinates getGeographicCoordinated(String address) {
-        //asynchronously finds and returns the corresponding geographic coordinates using input address
+    public void setLocation(String address) {
+        //asynchronously finds the corresponding geographic coordinates and calls setLocation with coordinates
         throw new NotImplementedError();
     }
 }
