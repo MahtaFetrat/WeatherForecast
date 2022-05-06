@@ -3,8 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_weather_icons_clear.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_weather_icons_cloudy.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_weather_icons_partially_cloudy_moon.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_weather_icons_partially_couldy_sun.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_weather_icons_rainy.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_weather_icons_runny.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_weather_icons_snowy.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_weather_icons_stormy.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_weather_icons_sunny.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_weather_icons_windy.xml" value="0.211" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.33" />
         <entry key="app/src/main/res/layout/location.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/location_address_input.xml" value="0.3428442028985507" />
         <entry key="app/src/main/res/layout/location_coordinates_input.xml" value="0.2418478260869565" />

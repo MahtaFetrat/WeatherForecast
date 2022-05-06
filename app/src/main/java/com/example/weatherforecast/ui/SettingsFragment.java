@@ -1,10 +1,12 @@
-package com.example.weatherforecast;
+package com.example.weatherforecast.ui;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.example.weatherforecast.R;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     @Override

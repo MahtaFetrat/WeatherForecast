@@ -1,4 +1,4 @@
-package com.example.weatherforecast;
+package com.example.weatherforecast.ui;
 
 import android.os.Bundle;
 
@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.example.weatherforecast.R;
 
 public class Weather extends Fragment {
     private final Runnable scheduledRequest;
