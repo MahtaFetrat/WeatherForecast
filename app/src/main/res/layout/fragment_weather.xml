@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
             android:text="@string/set_location"
-            android:textSize="14sp" />
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="15sp"/>
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -33,7 +34,8 @@
                 android:layout_marginHorizontal="5dp"
                 android:layout_weight="2"
                 android:text="@string/address"
-                android:textSize="12sp" />
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-condensed"  />
 
             <RadioButton
                 android:id="@+id/coordinate_type"
@@ -42,7 +44,8 @@
                 android:layout_marginHorizontal="5dp"
                 android:layout_weight="1.5"
                 android:text="@string/coordinates"
-                android:textSize="12sp" />
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="13sp" />
         </RadioGroup>
 
         <EditText
@@ -53,7 +56,8 @@
             android:layout_marginVertical="5dp"
             android:hint="@string/address_hint"
             android:paddingHorizontal="5dp"
-            android:textSize="14sp" />
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="15sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,5 +92,21 @@
         </LinearLayout>
 
         <include layout="@layout/current_weather_card" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/daily_forecast_title"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:paddingHorizontal="10dp"
+            android:layout_marginBottom="20dp"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/daily_forecast_recyclerview"
+            android:layout_marginHorizontal="10dp" />
     </LinearLayout>
 </ScrollView>

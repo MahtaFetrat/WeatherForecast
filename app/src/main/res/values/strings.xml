@@ -16,4 +16,5 @@
     <!-- Navigation -->
     <string name="weather_nav_menu_title">Weather</string>
     <string name="settings_nav_menu_title">Settings</string>
+    <string name="daily_forecast_title">Daily Forecast</string>
 </resources>
