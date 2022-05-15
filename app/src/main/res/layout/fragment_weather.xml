@@ -87,5 +87,6 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
+        <include layout="@layout/current_weather_card" />
     </LinearLayout>
 </ScrollView>
