@@ -3,9 +3,38 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__01d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__01n_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__02d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__03d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__03n_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__04n_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__09d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__0d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__10d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__10n_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__11d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__11n_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__13d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__13n_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__1d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__1n_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__2d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__2n_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__3d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__3n_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__4d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__4n_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__50d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic__9d_2x.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_baseline_cloud_24.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_weather_icons_clear.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_weather_icons_cloudy.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_weather_icons_moon.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_weather_icons_partially_cloudy_moon.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_weather_icons_partially_cloudy_sun.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_weather_icons_partially_couldy_sun.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_weather_icons_rainy.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_weather_icons_runny.xml" value="0.211" />
@@ -14,12 +43,13 @@
         <entry key="app/src/main/res/drawable/ic_weather_icons_sunny.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_weather_icons_windy.xml" value="0.211" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.2727272727272727" />
         <entry key="app/src/main/res/layout/location.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/location_address_input.xml" value="0.3428442028985507" />
         <entry key="app/src/main/res/layout/location_coordinates_input.xml" value="0.2418478260869565" />
         <entry key="app/src/main/res/layout/location_input.xml" value="0.3428442028985507" />
         <entry key="app/src/main/res/layout/location_type.xml" value="0.3428442028985507" />
+        <entry key="app/src/main/res/layout/weather_forecast_data_item.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.35625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19" />
@@ -28,7 +58,6 @@
       </map>
     </option>
   </component>
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
