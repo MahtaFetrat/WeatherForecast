@@ -6,26 +6,20 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.weatherforecast.model.WeatherForecastData;
+import com.example.weatherforecast.model.Details;
 
-import java.util.List;
 
 import kotlin.NotImplementedError;
 
 public class WeatherViewModel extends AndroidViewModel {
-    LiveData<List<WeatherForecastData>> next10Days;
-    LiveData<WeatherForecastData> currentWeather;
+    LiveData<Details> weatherDetails;
 
     public WeatherViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public LiveData<WeatherForecastData> getCurrentWeather() {
-        return currentWeather;
-    }
-
-    public LiveData<List<WeatherForecastData>> getNext10Days() {
-        return next10Days;
+    public LiveData<Details> getWeatherDetails() {
+        return weatherDetails;
     }
 
     public void setLocation(float latitude, float longitude) {
