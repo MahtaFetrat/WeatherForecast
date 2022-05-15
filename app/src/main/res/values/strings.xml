@@ -17,4 +17,13 @@
     <string name="weather_nav_menu_title">Weather</string>
     <string name="settings_nav_menu_title">Settings</string>
     <string name="daily_forecast_title">Daily Forecast</string>
+    <string name="wind_title">Wind</string>
+    <string name="wind_speed_title">Speed</string>
+    <string name="wind_from_title">From</string>
+    <string name="humidity_title">Humidity</string>
+    <string name="real_feel_title">Real Feel</string>
+    <string name="real_feel_day_title">Day</string>
+    <string name="real_feel_morning_title">Morning</string>
+    <string name="real_feel_evening_title">Evening</string>
+    <string name="real_feel_night_title">Night</string>
 </resources>

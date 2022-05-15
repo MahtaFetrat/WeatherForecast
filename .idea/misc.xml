@@ -46,6 +46,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/current_weather.xml" value="0.1" />
         <entry key="app/src/main/res/layout/current_weather_card.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/daily_weather_detail_activity.xml" value="0.33" />
         <entry key="app/src/main/res/layout/daily_weather_list_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/divider.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.33" />
