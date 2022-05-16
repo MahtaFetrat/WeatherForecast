@@ -11,7 +11,6 @@ public class Details {
         this.lat = lat;
         this.lon = lon;
         this.timezone = timezone;
-        this.timezone_offset = timezone_offset;
         this.current = current;
         this.daily = daily;
     }
