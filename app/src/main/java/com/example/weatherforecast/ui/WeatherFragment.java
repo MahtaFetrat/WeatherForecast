@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.text.Editable;
@@ -21,6 +23,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.weatherforecast.R;
+import com.example.weatherforecast.model.CurrentDetails;
+import com.example.weatherforecast.model.DayDetails;
+import com.example.weatherforecast.model.Details;
+import com.example.weatherforecast.model.FeelsLike;
+import com.example.weatherforecast.model.Temp;
+import com.example.weatherforecast.model.Weather;
 
 public class WeatherFragment extends Fragment {
     private final Runnable scheduledRequest;
@@ -40,6 +48,9 @@ public class WeatherFragment extends Fragment {
     private TextView currentWeatherRealFeel;
     private TextView currentWeatherHumidity;
     private TextView currentWeatherWind;
+
+    private RecyclerView dailyForecastRecyclerView;
+    private DailyForecastAdapter dailyForecastAdapter;
 
     private WeatherViewModel viewModel;
 
@@ -73,6 +84,8 @@ public class WeatherFragment extends Fragment {
         findViews(view);
         setInputTypeListener();
         setLocationChangeListener();
+        initializeDailyForecastRecyclerView();
+
         setViewModelObservers();
     }
 
@@ -91,6 +104,8 @@ public class WeatherFragment extends Fragment {
         currentWeatherRealFeel = view.findViewById(R.id.current_weather_real_feel);
         currentWeatherHumidity = view.findViewById(R.id.current_weather_humidity);
         currentWeatherWind = view.findViewById(R.id.current_weather_wind);
+
+        dailyForecastRecyclerView = view.findViewById(R.id.daily_forecast_recyclerview);
     }
 
     private void setInputTypeListener() {
@@ -136,16 +151,23 @@ public class WeatherFragment extends Fragment {
         scheduledRequestHandler.postDelayed(scheduledRequest, REQUEST_SCHEDULE_SECONDS);
     }
 
+    private void initializeDailyForecastRecyclerView() {
+        dailyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        dailyForecastAdapter = new DailyForecastAdapter(getActivity(), new DayDetails[]{});
+        dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);
+    }
+
     private void setViewModelObservers() {
         viewModel.getWeatherDetails().observe(getViewLifecycleOwner(), details -> {
             currentWeatherIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), getResources().getIdentifier(details.getCurrent().getWeather().getIconDrawableName(), "drawable", getActivity().getPackageName()), null));
             currentWeatherDescription.setText(details.getCurrent().getWeather().getDescription());
-            currentWeatherTemp.setText(String.format("%.2f", details.getCurrent().getTemp()));
-            currentWeatherMaxTemp.setText(String.format("%.2f", details.getDaily()[0].getTemp().getMax()));
-            currentWeatherMinTemp.setText(String.format("%.2f", details.getDaily()[0].getTemp().getMin()));
-            currentWeatherRealFeel.setText(String.format("%.2f", details.getCurrent().getFeels_like()));
+            currentWeatherTemp.setText(String.format("%.0fºc", details.getCurrent().getTemp()));
+            currentWeatherMaxTemp.setText(String.format("%.0fº", details.getDaily()[0].getTemp().getMax()));
+            currentWeatherMinTemp.setText(String.format("%.0fº", details.getDaily()[0].getTemp().getMin()));
+            currentWeatherRealFeel.setText(String.format("%.0fº", details.getCurrent().getFeels_like()));
             currentWeatherHumidity.setText(Integer.toString(details.getCurrent().getHumidity()));
-            currentWeatherWind.setText(String.format("%dº, %.2fmp/h", details.getCurrent().getWind_deg(), details.getCurrent().getWind_speed()));
+            currentWeatherWind.setText(String.format("%dº, %.1fmp/h", details.getCurrent().getWind_deg(), details.getCurrent().getWind_speed()));
+            dailyForecastAdapter.updateList(details.getDaily());
         });
     }
 }

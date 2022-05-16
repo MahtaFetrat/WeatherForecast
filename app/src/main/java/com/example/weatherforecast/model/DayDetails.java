@@ -1,5 +1,9 @@
 package com.example.weatherforecast.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class DayDetails {
     private long dt;
     private long sunrise;
@@ -30,7 +34,16 @@ public class DayDetails {
         this.weather = weather;
     }
 
+    public String getWeekday() {
+        Date date = new Date(this.dt);
+        return new SimpleDateFormat("EEEE").format(date);
+    }
+
     public Temp getTemp() {
         return temp;
+    }
+
+    public Weather getWeather() {
+        return weather[0];
     }
 }

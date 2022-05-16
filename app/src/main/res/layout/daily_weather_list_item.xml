@@ -8,6 +8,7 @@
     android:gravity="center">
 
     <TextView
+        android:id="@+id/daily_weather_weekday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
         <TextView
+            android:id="@+id/daily_weather_max_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="26º"
@@ -27,6 +29,7 @@
             android:fontFamily="sans-serif-condensed"
             android:textSize="15dp"/>
         <TextView
+            android:id="@+id/daily_weather_min_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10º"
@@ -34,6 +37,7 @@
             android:textSize="15dp" />
     </LinearLayout>
     <ImageView
+        android:id="@+id/daily_weather_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxHeight="50dp"
