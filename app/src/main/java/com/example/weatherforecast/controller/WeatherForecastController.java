@@ -6,7 +6,9 @@ import com.example.weatherforecast.model.Details;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.CacheControl;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -20,7 +22,18 @@ public class WeatherForecastController {
         client.newCall(getRequest(lat, lon)).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                // ToDo: no internet. handle cache...
+                // ToDo: handle no internet warning
+                try {
+                    Response response = client.newCall(getCacheRequest(lat, lon)).execute();
+                    if (response.isSuccessful()) {
+                        parseResponse(response, gson);
+                    } else {
+                        // ToDo: handle no cache for request...
+                    }
+                } catch (IOException ioException) {
+                    // this code is never reached because the request is "onlyIfCached".
+                    ioException.printStackTrace();
+                }
             }
 
             @Override
@@ -51,5 +64,11 @@ public class WeatherForecastController {
 
     public Request getRequest(double lat, double lon) {
         return new Request.Builder().url(getUrl(lat, lon)).build();
+    }
+
+    public Request getCacheRequest(double lat, double lon) {
+        return new Request.Builder()
+                .cacheControl(new CacheControl.Builder().onlyIfCached().maxStale(12, TimeUnit.HOURS).build())
+                .url(getUrl(lat, lon)).build();
     }
 }
