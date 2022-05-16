@@ -3,6 +3,7 @@ package com.example.weatherforecast.controller;
 import androidx.annotation.NonNull;
 
 import com.example.weatherforecast.model.Details;
+import com.example.weatherforecast.ui.WeatherViewModel;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -18,17 +19,17 @@ import okhttp3.Response;
 
 public class WeatherForecastController {
 
-    public void getDetails(double lat, double lon, OkHttpClient client, Gson gson) {
+    public void getDetails(double lat, double lon, OkHttpClient client, Gson gson, WeatherViewModel viewModel) {
         client.newCall(getRequest(lat, lon)).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                // ToDo: handle no internet warning
+                viewModel.handleNoInternetError();
                 try {
                     Response response = client.newCall(getCacheRequest(lat, lon)).execute();
                     if (response.isSuccessful()) {
-                        parseResponse(response, gson);
+                        parseResponse(response, gson, viewModel);
                     } else {
-                        // ToDo: handle no cache for request...
+                        viewModel.handleNoCacheFound();
                     }
                 } catch (IOException ioException) {
                     // this code is never reached because the request is "onlyIfCached".
@@ -39,7 +40,7 @@ public class WeatherForecastController {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (response.isSuccessful()) {
-                    parseResponse(response, gson);
+                    parseResponse(response, gson, viewModel);
                 } else {
                     // ToDo: request failed. handle bad response...
                 }
@@ -47,9 +48,9 @@ public class WeatherForecastController {
         });
     }
 
-    public void parseResponse(Response response, Gson gson) {
-        Details Details = gson.fromJson(response.body().charStream(), Details.class);
-        // ToDo: make livedata instances
+    public void parseResponse(Response response, Gson gson, WeatherViewModel viewModel) {
+        Details details = gson.fromJson(response.body().charStream(), Details.class);
+        viewModel.setLiveDetails(details);
     }
 
     public String getUrl(double lat, double lon) {

@@ -9,20 +9,34 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.weatherforecast.controller.WeatherForecastController;
 import com.example.weatherforecast.model.CurrentDetails;
 import com.example.weatherforecast.model.DayDetails;
 import com.example.weatherforecast.model.Details;
 import com.example.weatherforecast.model.FeelsLike;
 import com.example.weatherforecast.model.Temp;
 import com.example.weatherforecast.model.Weather;
+import com.google.gson.Gson;
+
+import java.io.File;
 
 import kotlin.NotImplementedError;
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 
 public class WeatherViewModel extends AndroidViewModel {
+    WeatherForecastController controller;
     MutableLiveData<Details> weatherDetails;
+    OkHttpClient client;
+    Gson gson;
 
     public WeatherViewModel(@NonNull Application application) {
         super(application);
+
+        controller = new WeatherForecastController();
+        Cache cache = new Cache(new File(getApplication().getCacheDir(),"WeatherForecastCache"), 10 * 1024 * 1024);
+        client = new OkHttpClient.Builder().cache(cache).build();
+        gson = new Gson();
 
         // Sample detail object
         weatherDetails = new MutableLiveData<Details>(new Details(33.44,
@@ -56,9 +70,21 @@ public class WeatherViewModel extends AndroidViewModel {
         return weatherDetails;
     }
 
+    public void setLiveDetails(Details details) {
+        weatherDetails.setValue(details);
+    }
+
+    public void handleNoInternetError() {
+        // ToDo
+    }
+
+    public void handleNoCacheFound() {
+        // ToDo
+    }
+
     public void setLocation(float latitude, float longitude) {
-        //asynchronously fetch data and set to livedata variables
-        throw new NotImplementedError();
+        controller.getDetails(latitude, longitude, client, gson, this);
+//        throw new NotImplementedError();
     }
 
     public void setLocation(String address) {
