@@ -12,4 +12,6 @@ public class FeelsLike {
         this.eve = eve;
         this.morn = morn;
     }
+
+
 }

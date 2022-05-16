@@ -12,4 +12,12 @@ public class Weather {
         this.description = description;
         this.icon = icon;
     }
+
+    public String getIconDrawableName() {
+        return String.format("@drawable/ic__%s_2x", this.icon);
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

@@ -17,7 +17,11 @@ public class Details {
         this.daily = daily;
     }
 
-    public String getCurrentWeatherIcon() {
-        return current.getWeatherIcon();
+    public CurrentDetails getCurrent() {
+        return current;
+    }
+
+    public DayDetails[] getDaily() {
+        return daily;
     }
 }

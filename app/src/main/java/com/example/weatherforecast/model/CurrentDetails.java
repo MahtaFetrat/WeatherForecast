@@ -27,7 +27,31 @@ public class CurrentDetails {
         this.weather = weather;
     }
 
-    public String getWeatherIcon() {
-        return weather[0].toString();
+    public double getTemp() {
+        return temp;
+    }
+
+    public Weather getWeather() {
+        return weather[0];
+    }
+
+    public double getFeels_like() {
+        return feels_like;
+    }
+
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public long getDt() {
+        return dt;
+    }
+
+    public double getWind_speed() {
+        return wind_speed;
+    }
+
+    public int getWind_deg() {
+        return wind_deg;
     }
 }

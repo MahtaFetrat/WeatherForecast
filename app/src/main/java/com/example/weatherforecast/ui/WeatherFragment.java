@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Handler;
@@ -15,13 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.weatherforecast.R;
-import com.example.weatherforecast.model.Details;
 
-public class Weather extends Fragment {
+public class WeatherFragment extends Fragment {
     private final Runnable scheduledRequest;
     private final Handler scheduledRequestHandler;
     private static final int REQUEST_SCHEDULE_SECONDS = 5000;
@@ -31,9 +32,18 @@ public class Weather extends Fragment {
     private EditText addressInputView;
     private EditText latitude, longitude;
 
+    private ImageView currentWeatherIcon;
+    private TextView currentWeatherDescription;
+    private TextView currentWeatherTemp;
+    private TextView currentWeatherMaxTemp;
+    private TextView currentWeatherMinTemp;
+    private TextView currentWeatherRealFeel;
+    private TextView currentWeatherHumidity;
+    private TextView currentWeatherWind;
+
     private WeatherViewModel viewModel;
 
-    public Weather() {
+    public WeatherFragment() {
         scheduledRequest = () -> {
             if (coordinateInputHolderLayout.getVisibility() == View.VISIBLE && !latitude.getText().toString().isEmpty() && !longitude.getText().toString().isEmpty()) {
                 viewModel.setLocation(Float.parseFloat(latitude.getText().toString()), Float.parseFloat(longitude.getText().toString()));
@@ -72,6 +82,15 @@ public class Weather extends Fragment {
         addressInputView = view.findViewById(R.id.address_input_view);
         latitude = view.findViewById(R.id.latitude);
         longitude = view.findViewById(R.id.longitude);
+
+        currentWeatherIcon = view.findViewById(R.id.current_weather_icon);
+        currentWeatherDescription = view.findViewById(R.id.current_weather_description);
+        currentWeatherTemp = view.findViewById(R.id.current_weather_temp);
+        currentWeatherMaxTemp = view.findViewById(R.id.current_weather_max_temp);
+        currentWeatherMinTemp = view.findViewById(R.id.current_weather_min_temp);
+        currentWeatherRealFeel = view.findViewById(R.id.current_weather_real_feel);
+        currentWeatherHumidity = view.findViewById(R.id.current_weather_humidity);
+        currentWeatherWind = view.findViewById(R.id.current_weather_wind);
     }
 
     private void setInputTypeListener() {
@@ -119,7 +138,14 @@ public class Weather extends Fragment {
 
     private void setViewModelObservers() {
         viewModel.getWeatherDetails().observe(getViewLifecycleOwner(), details -> {
-            // set ui data
+            currentWeatherIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), getResources().getIdentifier(details.getCurrent().getWeather().getIconDrawableName(), "drawable", getActivity().getPackageName()), null));
+            currentWeatherDescription.setText(details.getCurrent().getWeather().getDescription());
+            currentWeatherTemp.setText(String.format("%.2f", details.getCurrent().getTemp()));
+            currentWeatherMaxTemp.setText(String.format("%.2f", details.getDaily()[0].getTemp().getMax()));
+            currentWeatherMinTemp.setText(String.format("%.2f", details.getDaily()[0].getTemp().getMin()));
+            currentWeatherRealFeel.setText(String.format("%.2f", details.getCurrent().getFeels_like()));
+            currentWeatherHumidity.setText(Integer.toString(details.getCurrent().getHumidity()));
+            currentWeatherWind.setText(String.format("%dº, %.2fmp/h", details.getCurrent().getWind_deg(), details.getCurrent().getWind_speed()));
         });
     }
 }

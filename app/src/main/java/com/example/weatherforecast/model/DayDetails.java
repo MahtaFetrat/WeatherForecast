@@ -29,4 +29,8 @@ public class DayDetails {
         this.wind_deg = wind_deg;
         this.weather = weather;
     }
+
+    public Temp getTemp() {
+        return temp;
+    }
 }
