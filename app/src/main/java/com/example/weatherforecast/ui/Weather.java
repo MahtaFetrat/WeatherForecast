@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.example.weatherforecast.R;
+import com.example.weatherforecast.model.Details;
 
 public class Weather extends Fragment {
     private final Runnable scheduledRequest;
@@ -61,6 +63,7 @@ public class Weather extends Fragment {
         findViews(view);
         setInputTypeListener();
         setLocationChangeListener();
+        setViewModelObservers();
     }
 
     private void findViews(View view) {
@@ -93,13 +96,30 @@ public class Weather extends Fragment {
             }
         };
 
+        // add 5sec timer input listeners
         addressInputView.addTextChangedListener(locationTextWatcher);
         latitude.addTextChangedListener(locationTextWatcher);
         longitude.addTextChangedListener(locationTextWatcher);
+
+        // add onAction input listeners
+        addressInputView.setOnEditorActionListener((textView, i, keyEvent) -> {
+            viewModel.setLocation(addressInputView.getText().toString());
+            return true;
+        });
+        longitude.setOnEditorActionListener((textView, i, keyEvent) -> {
+            viewModel.setLocation(Float.parseFloat(latitude.getText().toString()), Float.parseFloat(longitude.getText().toString()));
+            return true;
+        });
     }
 
     private void resetScheduleRequestHandler() {
         scheduledRequestHandler.removeCallbacks(scheduledRequest);
         scheduledRequestHandler.postDelayed(scheduledRequest, REQUEST_SCHEDULE_SECONDS);
+    }
+
+    private void setViewModelObservers() {
+        viewModel.getWeatherDetails().observe(getViewLifecycleOwner(), details -> {
+            // set ui data
+        });
     }
 }
