@@ -7,4 +7,9 @@ public class Temp {
     private double night;
     private double eve;
     private double morn;
+
+    public Temp(double min, double max) {
+        this.min = min;
+        this.max = max;
+    }
 }

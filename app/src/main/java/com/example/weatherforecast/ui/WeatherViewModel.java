@@ -7,17 +7,42 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
+import com.example.weatherforecast.model.CurrentDetails;
+import com.example.weatherforecast.model.DayDetails;
 import com.example.weatherforecast.model.Details;
-
+import com.example.weatherforecast.model.FeelsLike;
+import com.example.weatherforecast.model.Temp;
+import com.example.weatherforecast.model.Weather;
 
 import kotlin.NotImplementedError;
 
 public class WeatherViewModel extends AndroidViewModel {
-    LiveData<Details> weatherDetails;
+    MutableLiveData<Details> weatherDetails;
 
     public WeatherViewModel(@NonNull Application application) {
         super(application);
+
+        // Sample detail object
+        weatherDetails = new MutableLiveData<Details>(new Details(33.44,
+                -94.04,
+                "America/Chicago",
+                -21600,
+                new CurrentDetails(1618317040,
+                        284.07,
+                        282.84,
+                        62,
+                        6,
+                        300,
+                        new Weather[]{new Weather(500, "Rain", "light rain", "10d")}),
+                new DayDetails[]{new DayDetails(1618308000,
+                        new Temp(275.09, 284.07),
+                        new FeelsLike(277.59, 276.27, 276.49, 276.27),
+                        81,
+                        3.06,
+                        294,
+                        new Weather[]{new Weather(500, "Rain", "light rain", "10d")})}));
     }
 
     public LiveData<Details> getWeatherDetails() {

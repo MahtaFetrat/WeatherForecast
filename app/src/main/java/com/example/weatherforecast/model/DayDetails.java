@@ -19,4 +19,14 @@ public class DayDetails {
     private int clouds;
     private double pop;
     private double uvi;
+
+    public DayDetails(long dt, Temp temp, FeelsLike feels_like, int humidity, double wind_speed, int wind_deg, Weather[] weather) {
+        this.dt = dt;
+        this.temp = temp;
+        this.feels_like = feels_like;
+        this.humidity = humidity;
+        this.wind_speed = wind_speed;
+        this.wind_deg = wind_deg;
+        this.weather = weather;
+    }
 }

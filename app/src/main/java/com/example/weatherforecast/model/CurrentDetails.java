@@ -16,4 +16,18 @@ public class CurrentDetails {
     private int clouds;
     private double uvi;
     private int visibility;
+
+    public CurrentDetails(long dt, double temp, double feels_like, int humidity, double wind_speed, int wind_deg, Weather[] weather) {
+        this.dt = dt;
+        this.temp = temp;
+        this.feels_like = feels_like;
+        this.humidity = humidity;
+        this.wind_speed = wind_speed;
+        this.wind_deg = wind_deg;
+        this.weather = weather;
+    }
+
+    public String getWeatherIcon() {
+        return weather[0].toString();
+    }
 }
