@@ -2,7 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.DailyWeatherDetailActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,13 +21,24 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="1.5"
                 android:orientation="vertical"
                 android:padding="15dp">
 
+                <TextView
+                    android:id="@+id/daily_detail_weekday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.5"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Tuesday"
+                    android:textSize="40sp"
+                    android:layout_marginBottom="5dp" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp" >
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -33,6 +46,7 @@
                         android:src="@drawable/ic_baseline_navigation_24" />
 
                     <TextView
+                        android:id="@+id/daily_detail_max_temp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="cursive"
@@ -46,6 +60,7 @@
                         android:src="@drawable/ic_baseline_navigation_24" />
 
                     <TextView
+                        android:id="@+id/daily_detail_min_temp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="cursive"
@@ -54,6 +69,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/daily_detail_description"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -63,14 +79,11 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/daily_detail_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:maxWidth="50dp"
-                android:maxHeight="50dp"
-                android:minWidth="50dp"
-                android:minHeight="50dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic__03d_2x" />
         </LinearLayout>
@@ -113,6 +126,7 @@
                         android:textAlignment="textStart" />
 
                     <TextView
+                        android:id="@+id/daily_detail_wind_speed"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -135,6 +149,7 @@
                         android:textAlignment="textStart" />
 
                     <TextView
+                        android:id="@+id/daily_detail_wind_degree"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -177,6 +192,7 @@
                     android:textAlignment="textStart" />
 
                 <TextView
+                    android:id="@+id/daily_detail_humidity"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -202,7 +218,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             app:cardElevation="5dp"
-            app:strokeWidth="1dp">
+            app:strokeWidth="1dp"
+            android:layout_marginBottom="50dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -223,6 +240,7 @@
                         android:textAlignment="textStart" />
 
                     <TextView
+                        android:id="@+id/daily_detail_day_feel"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -245,6 +263,7 @@
                         android:textAlignment="textStart" />
 
                     <TextView
+                        android:id="@+id/daily_detail_night_feel"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -267,6 +286,7 @@
                         android:textAlignment="textStart" />
 
                     <TextView
+                        android:id="@+id/daily_detail_eve_feel"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -289,6 +309,7 @@
                         android:textAlignment="textStart" />
 
                     <TextView
+                        android:id="@+id/daily_detail_morn_feel"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

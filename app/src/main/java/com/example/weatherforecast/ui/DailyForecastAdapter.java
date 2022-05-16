@@ -1,6 +1,8 @@
 package com.example.weatherforecast.ui;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,23 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.view.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DailyWeatherDetailActivity.class);
+            DayDetails dailyDetail = dailyDetails[position];
+            intent.putExtra("weekday", dailyDetail.getWeekday());
+            intent.putExtra("maxTemp", String.format("%.0fº", dailyDetail.getTemp().getMax()));
+            intent.putExtra("minTemp", String.format("%.0fº", dailyDetail.getTemp().getMin()));
+            intent.putExtra("description", dailyDetail.getWeather().getDescription());
+            intent.putExtra("icon", dailyDetail.getWeather().getIconDrawableName());
+            intent.putExtra("windSpeed", String.format("%.1fmp/h", dailyDetail.getWindSpeed()));
+            intent.putExtra("windDegree", String.format("%dº", dailyDetail.getWindDeg()));
+            intent.putExtra("humidity", String.format("%d%%", dailyDetail.getHumidity()));
+            intent.putExtra("dayFeel", String.format("%.0fº", dailyDetail.getFeelsLike().getDay()));
+            intent.putExtra("nightFeel", String.format("%.0fº", dailyDetail.getFeelsLike().getNight()));
+            intent.putExtra("eveFeel", String.format("%.0fº", dailyDetail.getFeelsLike().getEve()));
+            intent.putExtra("mornFeel", String.format("%.0fº", dailyDetail.getFeelsLike().getMorn()));
+            context.startActivity(intent);
+        });
         holder.dailyWeatherWeekday.setText(dailyDetails[position].getWeekday());
         holder.dailyWeatherMaxTemp.setText(String.format("%.0fº", dailyDetails[position].getTemp().getMax()));
         holder.dailyWeatherMinTemp.setText(String.format("%.0fº", dailyDetails[position].getTemp().getMin()));
@@ -49,6 +68,7 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        View view;
         TextView dailyWeatherWeekday;
         TextView dailyWeatherMaxTemp;
         TextView dailyWeatherMinTemp;
@@ -56,6 +76,7 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
 
         public ViewHolder(View view) {
             super(view);
+            this.view = view;
 
             dailyWeatherWeekday = view.findViewById(R.id.daily_weather_weekday);
             dailyWeatherMaxTemp = view.findViewById(R.id.daily_weather_max_temp);

@@ -1,7 +1,6 @@
 package com.example.weatherforecast.model;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class DayDetails {
@@ -12,25 +11,25 @@ public class DayDetails {
     private long moonset;
     private double moon_phase;
     private Temp temp;
-    private FeelsLike feels_like;
+    private FeelsLike feelsLike;
     private int pressure;
     private int humidity;
     private double dew_point;
-    private double wind_speed;
-    private int wind_deg;
+    private double windSpeed;
+    private int windDeg;
     private double wind_gust;
     private Weather[] weather;
     private int clouds;
     private double pop;
     private double uvi;
 
-    public DayDetails(long dt, Temp temp, FeelsLike feels_like, int humidity, double wind_speed, int wind_deg, Weather[] weather) {
+    public DayDetails(long dt, Temp temp, FeelsLike feels_like, int humidity, double windSpeed, int wind_deg, Weather[] weather) {
         this.dt = dt;
         this.temp = temp;
-        this.feels_like = feels_like;
+        this.feelsLike = feels_like;
         this.humidity = humidity;
-        this.wind_speed = wind_speed;
-        this.wind_deg = wind_deg;
+        this.windSpeed = windSpeed;
+        this.windDeg = wind_deg;
         this.weather = weather;
     }
 
@@ -45,5 +44,21 @@ public class DayDetails {
 
     public Weather getWeather() {
         return weather[0];
+    }
+
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+
+    public int getWindDeg() {
+        return windDeg;
+    }
+
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public FeelsLike getFeelsLike() {
+        return feelsLike;
     }
 }

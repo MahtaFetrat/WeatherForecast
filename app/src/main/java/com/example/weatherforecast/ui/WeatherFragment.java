@@ -165,7 +165,7 @@ public class WeatherFragment extends Fragment {
             currentWeatherMaxTemp.setText(String.format("%.0fº", details.getDaily()[0].getTemp().getMax()));
             currentWeatherMinTemp.setText(String.format("%.0fº", details.getDaily()[0].getTemp().getMin()));
             currentWeatherRealFeel.setText(String.format("%.0fº", details.getCurrent().getFeels_like()));
-            currentWeatherHumidity.setText(Integer.toString(details.getCurrent().getHumidity()));
+            currentWeatherHumidity.setText(String.format("%d%%", details.getCurrent().getHumidity()));
             currentWeatherWind.setText(String.format("%dº, %.1fmp/h", details.getCurrent().getWind_deg(), details.getCurrent().getWind_speed()));
             dailyForecastAdapter.updateList(details.getDaily());
         });
