@@ -2,7 +2,6 @@ package com.example.weatherforecast.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,13 +46,13 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
             intent.putExtra("minTemp", String.format("%.0fº", dailyDetail.getTemp().getMin()));
             intent.putExtra("description", dailyDetail.getWeather().getDescription());
             intent.putExtra("icon", dailyDetail.getWeather().getIconDrawableName());
-            intent.putExtra("windSpeed", String.format("%.1fmp/h", dailyDetail.getWindSpeed()));
-            intent.putExtra("windDegree", String.format("%dº", dailyDetail.getWindDeg()));
+            intent.putExtra("windSpeed", String.format("%.1fmp/h", dailyDetail.getWind_speed()));
+            intent.putExtra("windDegree", String.format("%dº", dailyDetail.getWind_deg()));
             intent.putExtra("humidity", String.format("%d%%", dailyDetail.getHumidity()));
-            intent.putExtra("dayFeel", String.format("%.0fº", dailyDetail.getFeelsLike().getDay()));
-            intent.putExtra("nightFeel", String.format("%.0fº", dailyDetail.getFeelsLike().getNight()));
-            intent.putExtra("eveFeel", String.format("%.0fº", dailyDetail.getFeelsLike().getEve()));
-            intent.putExtra("mornFeel", String.format("%.0fº", dailyDetail.getFeelsLike().getMorn()));
+            intent.putExtra("dayFeel", String.format("%.0fº", dailyDetail.getFeels_like().getDay()));
+            intent.putExtra("nightFeel", String.format("%.0fº", dailyDetail.getFeels_like().getNight()));
+            intent.putExtra("eveFeel", String.format("%.0fº", dailyDetail.getFeels_like().getEve()));
+            intent.putExtra("mornFeel", String.format("%.0fº", dailyDetail.getFeels_like().getMorn()));
             context.startActivity(intent);
         });
         holder.dailyWeatherWeekday.setText(dailyDetails[position].getWeekday());
