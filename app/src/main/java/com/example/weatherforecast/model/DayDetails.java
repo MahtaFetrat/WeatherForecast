@@ -2,9 +2,7 @@ package com.example.weatherforecast.model;
 
 import android.text.format.DateFormat;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class DayDetails {
@@ -27,8 +25,9 @@ public class DayDetails {
     }
 
     public String getWeekday() {
-        Date date = new Date(this.dt);
-        return new SimpleDateFormat("EEEE").format(date);
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTimeInMillis(this.dt * 1000);
+        return DateFormat.format("EEEE", cal).toString();
     }
 
     public Temp getTemp() {
