@@ -1,5 +1,6 @@
 package com.example.weatherforecast.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -116,14 +117,6 @@ public class WeatherFragment extends Fragment {
         locationTypeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             coordinateInputHolderLayout.setVisibility(checkedId == R.id.address_type ? View.GONE : View.VISIBLE);
             addressInputView.setVisibility(checkedId == R.id.address_type ? View.VISIBLE : View.GONE);
-
-            // move focus to new input field
-            if (view.findViewById(checkedId == R.id.address_type ? R.id.address_input_view : R.id.latitude).requestFocus()) {
-                ((InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(
-                        InputMethodManager.SHOW_FORCED,
-                        InputMethodManager.HIDE_IMPLICIT_ONLY
-                );
-            }
             resetScheduleRequestHandler();
         });
     }
@@ -150,10 +143,21 @@ public class WeatherFragment extends Fragment {
         // add onAction input listeners
         addressInputView.setOnEditorActionListener((textView, i, keyEvent) -> {
             viewModel.setLocation(addressInputView.getText().toString());
+            ((InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+            addressInputView.clearFocus();
+            return true;
+        });
+        latitude.setOnEditorActionListener((textView, i, keyEvent) -> {
+            //TODO: empty
+            viewModel.setLocation(Float.parseFloat(latitude.getText().toString()), Float.parseFloat(longitude.getText().toString()));
+            ((InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+            latitude.clearFocus();
             return true;
         });
         longitude.setOnEditorActionListener((textView, i, keyEvent) -> {
             viewModel.setLocation(Float.parseFloat(latitude.getText().toString()), Float.parseFloat(longitude.getText().toString()));
+            ((InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+            longitude.clearFocus();
             return true;
         });
     }
