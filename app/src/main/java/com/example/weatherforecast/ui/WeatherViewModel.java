@@ -27,6 +27,7 @@ import okhttp3.OkHttpClient;
 public class WeatherViewModel extends AndroidViewModel {
     WeatherForecastController controller;
     MutableLiveData<Details> weatherDetails;
+    MutableLiveData<Boolean> internetConnected;
     OkHttpClient client;
     Gson gson;
 
@@ -38,6 +39,7 @@ public class WeatherViewModel extends AndroidViewModel {
         client = new OkHttpClient.Builder().cache(cache).build();
         gson = new Gson();
 
+        internetConnected = new MutableLiveData<Boolean>(false);
         // Sample detail object
         weatherDetails = new MutableLiveData<Details>(new Details(33.44,
                 -94.04,
@@ -71,20 +73,19 @@ public class WeatherViewModel extends AndroidViewModel {
     }
 
     public void setLiveDetails(Details details) {
-        weatherDetails.setValue(details);
+        weatherDetails.postValue(details);
     }
 
-    public void handleNoInternetError() {
-        // ToDo
+    public void setInternetConnectedState(boolean connected) {
+        internetConnected.postValue(connected);
     }
 
-    public void handleNoCacheFound() {
-        // ToDo
+    public LiveData<Boolean> getInternetConnectedState() {
+        return internetConnected;
     }
 
     public void setLocation(float latitude, float longitude) {
         controller.getDetails(latitude, longitude, client, gson, this);
-//        throw new NotImplementedError();
     }
 
     public void setLocation(String address) {

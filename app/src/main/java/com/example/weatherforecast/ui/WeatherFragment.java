@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.weatherforecast.R;
 import com.example.weatherforecast.model.CurrentDetails;
@@ -168,6 +169,10 @@ public class WeatherFragment extends Fragment {
             currentWeatherHumidity.setText(String.format("%d%%", details.getCurrent().getHumidity()));
             currentWeatherWind.setText(String.format("%dº, %.1fmp/h", details.getCurrent().getWind_deg(), details.getCurrent().getWind_speed()));
             dailyForecastAdapter.updateList(details.getDaily());
+        });
+        
+        viewModel.getInternetConnectedState().observe(getViewLifecycleOwner(), connected -> {
+            if (!connected) Toast.makeText(getActivity(), "No internet Connection", Toast.LENGTH_SHORT).show();
         });
     }
 }

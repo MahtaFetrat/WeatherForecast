@@ -23,13 +23,11 @@ public class WeatherForecastController {
         client.newCall(getRequest(lat, lon)).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                viewModel.handleNoInternetError();
+                viewModel.setInternetConnectedState(false);
                 try {
                     Response response = client.newCall(getCacheRequest(lat, lon)).execute();
                     if (response.isSuccessful()) {
                         parseResponse(response, gson, viewModel);
-                    } else {
-                        viewModel.handleNoCacheFound();
                     }
                 } catch (IOException ioException) {
                     // this code is never reached because the request is "onlyIfCached".
@@ -39,10 +37,9 @@ public class WeatherForecastController {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
+                viewModel.setInternetConnectedState(true);
                 if (response.isSuccessful()) {
                     parseResponse(response, gson, viewModel);
-                } else {
-                    // ToDo: request failed. handle bad response...
                 }
             }
         });
@@ -64,12 +61,14 @@ public class WeatherForecastController {
     }
 
     public Request getRequest(double lat, double lon) {
-        return new Request.Builder().url(getUrl(lat, lon)).build();
+        return new Request.Builder()
+                .cacheControl(new CacheControl.Builder().noCache().build())
+                .url(getUrl(lat, lon)).build();
     }
 
     public Request getCacheRequest(double lat, double lon) {
         return new Request.Builder()
-                .cacheControl(new CacheControl.Builder().onlyIfCached().maxStale(12, TimeUnit.HOURS).build())
+                .cacheControl(new CacheControl.Builder().onlyIfCached().maxAge(12, TimeUnit.HOURS).build())
                 .url(getUrl(lat, lon)).build();
     }
 }
