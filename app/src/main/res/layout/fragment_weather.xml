@@ -88,7 +88,12 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <include layout="@layout/current_weather_card" />
+    <include layout="@layout/select_location_card"
+        android:id="@+id/select_location_layout" />
+
+    <include layout="@layout/current_weather_card"
+        android:id="@+id/current_weather_layout"
+        android:visibility="gone"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -97,14 +102,18 @@
         android:fontFamily="sans-serif-condensed"
         android:paddingHorizontal="10dp"
         android:text="@string/daily_forecast_title"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:id="@+id/daily_forecast_title"
+        android:visibility="gone" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:cardElevation="5dp"
-        app:strokeWidth="1dp">
+        app:strokeWidth="1dp"
+        android:id="@+id/daily_forecast_card_view"
+        android:visibility="gone" >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_forecast_recyclerview"

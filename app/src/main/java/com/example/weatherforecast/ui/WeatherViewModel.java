@@ -40,33 +40,7 @@ public class WeatherViewModel extends AndroidViewModel {
         gson = new Gson();
 
         toastMessage = new MutableLiveData<String>();
-
-        // Sample detail object
-        weatherDetails = new MutableLiveData<Details>(new Details(33.44,
-                -94.04,
-                "America/Chicago",
-                -21600,
-                new CurrentDetails(1618317040,
-                        13,
-                        14,
-                        62,
-                        6,
-                        300,
-                        new Weather[]{new Weather(500, "Rain", "light rain", "10d")}),
-                new DayDetails[]{new DayDetails(1618308000,
-                        new Temp(5, 27),
-                        new FeelsLike(16, 10, 12, 13),
-                        81,
-                        3.06,
-                        294,
-                        new Weather[]{new Weather(500, "Rain", "light rain", "10d")}),
-                        new DayDetails(1618308000,
-                                new Temp(8, 29),
-                                new FeelsLike(19, 10, 12, 13),
-                                61,
-                                3.16,
-                                280,
-                                new Weather[]{new Weather(500, "Cloudy", "Partially sunny", "02d")})}));
+        weatherDetails = new MutableLiveData<Details>();
     }
 
     public LiveData<Details> getWeatherDetails() {

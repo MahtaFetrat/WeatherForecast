@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,11 @@ public class WeatherFragment extends Fragment {
     private LinearLayout coordinateInputHolderLayout;
     private EditText addressInputView;
     private EditText latitude, longitude;
+
+    private View promptLocationLayout;
+    private View currentWeatherLayout;
+    private View dailyForecastTitle;
+    private View dailyForecastCardView;
 
     private ImageView currentWeatherIcon;
     private TextView currentWeatherDescription;
@@ -87,10 +93,9 @@ public class WeatherFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(WeatherViewModel.class);
 
         findViews(view);
-        setInputTypeListener(view);
+        setInputTypeListener();
         setLocationChangeListener();
         initializeDailyForecastRecyclerView();
-
         setViewModelObservers();
     }
 
@@ -100,6 +105,11 @@ public class WeatherFragment extends Fragment {
         addressInputView = view.findViewById(R.id.address_input_view);
         latitude = view.findViewById(R.id.latitude);
         longitude = view.findViewById(R.id.longitude);
+
+        promptLocationLayout = view.findViewById(R.id.select_location_layout);
+        currentWeatherLayout = view.findViewById(R.id.current_weather_layout);
+        dailyForecastTitle = view.findViewById(R.id.daily_forecast_title);
+        dailyForecastCardView = view.findViewById(R.id.daily_forecast_card_view);
 
         currentWeatherIcon = view.findViewById(R.id.current_weather_icon);
         currentWeatherDescription = view.findViewById(R.id.current_weather_description);
@@ -113,7 +123,7 @@ public class WeatherFragment extends Fragment {
         dailyForecastRecyclerView = view.findViewById(R.id.daily_forecast_recyclerview);
     }
 
-    private void setInputTypeListener(View view) {
+    private void setInputTypeListener() {
         locationTypeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             coordinateInputHolderLayout.setVisibility(checkedId == R.id.address_type ? View.GONE : View.VISIBLE);
             addressInputView.setVisibility(checkedId == R.id.address_type ? View.VISIBLE : View.GONE);
@@ -175,6 +185,11 @@ public class WeatherFragment extends Fragment {
 
     private void setViewModelObservers() {
         viewModel.getWeatherDetails().observe(getViewLifecycleOwner(), details -> {
+            promptLocationLayout.setVisibility(View.GONE);
+            currentWeatherLayout.setVisibility(View.VISIBLE);
+            dailyForecastTitle.setVisibility(View.VISIBLE);
+            dailyForecastCardView.setVisibility(View.VISIBLE);
+
             currentWeatherIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), getResources().getIdentifier(details.getCurrent().getWeather().getIconDrawableName(), "drawable", getActivity().getPackageName()), null));
             currentWeatherDescription.setText(details.getCurrent().getWeather().getDescription());
             currentWeatherTemp.setText(String.format("%.0fºc", details.getCurrent().getTemp()));
