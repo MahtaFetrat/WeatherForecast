@@ -28,6 +28,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.weatherforecast.MainActivity;
 import com.example.weatherforecast.R;
 import com.example.weatherforecast.model.CurrentDetails;
 import com.example.weatherforecast.model.DayDetails;
@@ -97,6 +98,10 @@ public class WeatherFragment extends Fragment {
         setLocationChangeListener();
         initializeDailyForecastRecyclerView();
         setViewModelObservers();
+
+        if (MainActivity.latitude != -181) {
+            viewModel.setLocation(MainActivity.latitude, MainActivity.longitude);
+        }
     }
 
     private void findViews(View view) {
@@ -134,10 +139,12 @@ public class WeatherFragment extends Fragment {
     private void setLocationChangeListener() {
         TextWatcher locationTextWatcher = new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -200,7 +207,7 @@ public class WeatherFragment extends Fragment {
             currentWeatherWind.setText(String.format("%dº, %.1fmp/h", details.getCurrent().getWind_deg(), details.getCurrent().getWind_speed()));
             dailyForecastAdapter.updateList(details.getDaily());
         });
-        
+
         viewModel.getToastMessage().observe(getViewLifecycleOwner(), message -> {
             Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         });

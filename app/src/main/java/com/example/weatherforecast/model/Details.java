@@ -22,4 +22,12 @@ public class Details {
     public DayDetails[] getDaily() {
         return daily;
     }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
 }

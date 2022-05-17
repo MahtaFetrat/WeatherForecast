@@ -3,11 +3,14 @@ package com.example.weatherforecast.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.weatherforecast.MainActivity;
 import com.example.weatherforecast.R;
 
 public class DailyWeatherDetailActivity extends AppCompatActivity {
@@ -63,5 +66,15 @@ public class DailyWeatherDetailActivity extends AppCompatActivity {
         nightFeel.setText(intent.getStringExtra("nightFeel"));
         eveFeel.setText(intent.getStringExtra("eveFeel"));
         mornFeel.setText(intent.getStringExtra("mornFeel"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putFloat(String.valueOf(R.string.latitude_save_key), MainActivity.latitude);
+        editor.putFloat(String.valueOf(R.string.longitude_save_key), MainActivity.longitude);
+        editor.apply();
     }
 }

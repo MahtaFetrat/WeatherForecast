@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.weatherforecast.MainActivity;
 import com.example.weatherforecast.controller.WeatherForecastController;
 import com.example.weatherforecast.model.CurrentDetails;
 import com.example.weatherforecast.model.DayDetails;
@@ -48,7 +49,10 @@ public class WeatherViewModel extends AndroidViewModel {
     }
 
     public void setLiveDetails(Details details) {
-        if (details != null) weatherDetails.postValue(details);
+        if (details != null) {
+            weatherDetails.postValue(details);
+            MainActivity.setLocationValues(details.getLat(), details.getLon());
+        }
     }
 
     public void reportInternetNotConnected() {
