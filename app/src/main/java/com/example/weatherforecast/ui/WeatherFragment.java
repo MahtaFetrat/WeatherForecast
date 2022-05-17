@@ -1,5 +1,6 @@
 package com.example.weatherforecast.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -83,7 +86,7 @@ public class WeatherFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(WeatherViewModel.class);
 
         findViews(view);
-        setInputTypeListener();
+        setInputTypeListener(view);
         setLocationChangeListener();
         initializeDailyForecastRecyclerView();
 
@@ -109,10 +112,18 @@ public class WeatherFragment extends Fragment {
         dailyForecastRecyclerView = view.findViewById(R.id.daily_forecast_recyclerview);
     }
 
-    private void setInputTypeListener() {
+    private void setInputTypeListener(View view) {
         locationTypeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             coordinateInputHolderLayout.setVisibility(checkedId == R.id.address_type ? View.GONE : View.VISIBLE);
             addressInputView.setVisibility(checkedId == R.id.address_type ? View.VISIBLE : View.GONE);
+
+            // move focus to new input field
+            if (view.findViewById(checkedId == R.id.address_type ? R.id.address_input_view : R.id.latitude).requestFocus()) {
+                ((InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(
+                        InputMethodManager.SHOW_FORCED,
+                        InputMethodManager.HIDE_IMPLICIT_ONLY
+                );
+            }
             resetScheduleRequestHandler();
         });
     }
