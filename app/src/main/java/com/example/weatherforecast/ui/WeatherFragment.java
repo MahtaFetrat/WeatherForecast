@@ -171,8 +171,8 @@ public class WeatherFragment extends Fragment {
             dailyForecastAdapter.updateList(details.getDaily());
         });
         
-        viewModel.getInternetConnectedState().observe(getViewLifecycleOwner(), connected -> {
-            if (!connected) Toast.makeText(getActivity(), "No internet Connection", Toast.LENGTH_SHORT).show();
+        viewModel.getToastMessage().observe(getViewLifecycleOwner(), message -> {
+            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         });
     }
 }

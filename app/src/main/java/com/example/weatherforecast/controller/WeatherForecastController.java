@@ -23,7 +23,7 @@ public class WeatherForecastController {
         client.newCall(getRequest(lat, lon)).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                viewModel.setInternetConnectedState(false);
+                viewModel.reportInternetNotConnected();
                 try {
                     Response response = client.newCall(getCacheRequest(lat, lon)).execute();
                     if (response.isSuccessful()) {
@@ -37,9 +37,10 @@ public class WeatherForecastController {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
-                viewModel.setInternetConnectedState(true);
                 if (response.isSuccessful()) {
                     parseResponse(response, gson, viewModel);
+                } else {
+                    viewModel.reportInvalidLocation();
                 }
             }
         });

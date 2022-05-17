@@ -27,7 +27,7 @@ import okhttp3.OkHttpClient;
 public class WeatherViewModel extends AndroidViewModel {
     WeatherForecastController controller;
     MutableLiveData<Details> weatherDetails;
-    MutableLiveData<Boolean> internetConnected;
+    MutableLiveData<String> toastMessage;
     OkHttpClient client;
     Gson gson;
 
@@ -39,7 +39,8 @@ public class WeatherViewModel extends AndroidViewModel {
         client = new OkHttpClient.Builder().cache(cache).build();
         gson = new Gson();
 
-        internetConnected = new MutableLiveData<Boolean>(false);
+        toastMessage = new MutableLiveData<String>();
+
         // Sample detail object
         weatherDetails = new MutableLiveData<Details>(new Details(33.44,
                 -94.04,
@@ -73,15 +74,15 @@ public class WeatherViewModel extends AndroidViewModel {
     }
 
     public void setLiveDetails(Details details) {
-        weatherDetails.postValue(details);
+        if (details != null) weatherDetails.postValue(details);
     }
 
-    public void setInternetConnectedState(boolean connected) {
-        internetConnected.postValue(connected);
+    public void reportInternetNotConnected() {
+        toastMessage.postValue("No internet connection");
     }
 
-    public LiveData<Boolean> getInternetConnectedState() {
-        return internetConnected;
+    public LiveData<String> getToastMessage() {
+        return toastMessage;
     }
 
     public void setLocation(float latitude, float longitude) {
@@ -91,5 +92,9 @@ public class WeatherViewModel extends AndroidViewModel {
     public void setLocation(String address) {
         //asynchronously finds the corresponding geographic coordinates and calls setLocation with coordinates
         throw new NotImplementedError();
+    }
+
+    public void reportInvalidLocation() {
+        toastMessage.postValue("Couldn't find the desired location");
     }
 }
