@@ -64,12 +64,14 @@ public class WeatherForecastController {
     }
 
     public Request getRequest(double lat, double lon) {
-        return new Request.Builder().url(getUrl(lat, lon)).build();
+        return new Request.Builder()
+                .cacheControl(new CacheControl.Builder().noCache().build())
+                .url(getUrl(lat, lon)).build();
     }
 
     public Request getCacheRequest(double lat, double lon) {
         return new Request.Builder()
-                .cacheControl(new CacheControl.Builder().onlyIfCached().maxStale(12, TimeUnit.HOURS).build())
+                .cacheControl(new CacheControl.Builder().onlyIfCached().maxAge(12, TimeUnit.HOURS).build())
                 .url(getUrl(lat, lon)).build();
     }
 }
