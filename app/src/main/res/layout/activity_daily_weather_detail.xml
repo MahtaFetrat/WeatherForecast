@@ -38,7 +38,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp" >
+                    android:layout_marginBottom="5dp"
+                    android:paddingLeft="5dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -75,7 +76,8 @@
                     android:layout_weight="1"
                     android:fontFamily="cursive"
                     android:text="Partially sunny"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:paddingLeft="10dp" />
             </LinearLayout>
 
             <ImageView
