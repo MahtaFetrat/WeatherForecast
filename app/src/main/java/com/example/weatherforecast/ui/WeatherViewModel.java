@@ -67,9 +67,9 @@ public class WeatherViewModel extends AndroidViewModel {
         controller.getDetails(latitude, longitude, client, gson, this);
     }
 
-    public void setLocation(String address) {
+    public void setLocation(String cityName) {
         //asynchronously finds the corresponding geographic coordinates and calls setLocation with coordinates
-        throw new NotImplementedError();
+        controller.getCityDetails(cityName, client, gson, this);
     }
 
     public void reportInvalidLocation() {
