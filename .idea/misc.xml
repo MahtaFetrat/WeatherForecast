@@ -30,6 +30,8 @@
         <entry key="app/src/main/res/drawable/ic__50d_2x.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic__9d_2x.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_baseline_cloud_24.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.316" />
+        <entry key="app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.316" />
         <entry key="app/src/main/res/drawable/ic_baseline_navigation_24.xml" value="0.3575" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_weather_icons_clear.xml" value="0.211" />
@@ -51,7 +53,7 @@
         <entry key="app/src/main/res/layout/daily_weather_detail_activity.xml" value="0.33" />
         <entry key="app/src/main/res/layout/daily_weather_list_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/divider.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.5" />
         <entry key="app/src/main/res/layout/location.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/location_address_input.xml" value="0.3428442028985507" />
         <entry key="app/src/main/res/layout/location_coordinates_input.xml" value="0.2418478260869565" />

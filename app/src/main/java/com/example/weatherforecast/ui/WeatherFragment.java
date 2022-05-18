@@ -1,7 +1,6 @@
 package com.example.weatherforecast.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.text.Editable;
-import android.text.Layout;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -30,18 +28,16 @@ import android.widget.Toast;
 
 import com.example.weatherforecast.MainActivity;
 import com.example.weatherforecast.R;
-import com.example.weatherforecast.model.CurrentDetails;
 import com.example.weatherforecast.model.DayDetails;
-import com.example.weatherforecast.model.Details;
-import com.example.weatherforecast.model.FeelsLike;
-import com.example.weatherforecast.model.Temp;
-import com.example.weatherforecast.model.Weather;
 
 public class WeatherFragment extends Fragment {
     private final Runnable scheduledRequest;
     private final Handler scheduledRequestHandler;
     private static final int REQUEST_SCHEDULE_SECONDS = 5000;
 
+    private GridLayout selectLocationButton;
+    private LinearLayout selectLocationExpanded;
+    private ImageView expansionIcon;
     private RadioGroup locationTypeRadioGroup;
     private LinearLayout coordinateInputHolderLayout;
     private EditText addressInputView;
@@ -94,6 +90,7 @@ public class WeatherFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(WeatherViewModel.class);
 
         findViews(view);
+        setSelectLocationOnClickListener();
         setInputTypeListener();
         setLocationChangeListener();
         initializeDailyForecastRecyclerView();
@@ -105,6 +102,9 @@ public class WeatherFragment extends Fragment {
     }
 
     private void findViews(View view) {
+        selectLocationButton = view.findViewById(R.id.select_location_button);
+        selectLocationExpanded = view.findViewById(R.id.expanded_input);
+        expansionIcon = view.findViewById(R.id.expansion_icon);
         locationTypeRadioGroup = view.findViewById(R.id.location_type_radio_group);
         coordinateInputHolderLayout = view.findViewById(R.id.coordinate_input_holder);
         addressInputView = view.findViewById(R.id.address_input_view);
@@ -126,6 +126,22 @@ public class WeatherFragment extends Fragment {
         currentWeatherWind = view.findViewById(R.id.current_weather_wind);
 
         dailyForecastRecyclerView = view.findViewById(R.id.daily_forecast_recyclerview);
+    }
+
+    private void setSelectLocationOnClickListener() {
+        selectLocationButton.setOnClickListener(view -> {
+            toggleLocationExpanded();
+        });
+    }
+
+    private void toggleLocationExpanded() {
+        if (selectLocationExpanded.getVisibility() == View.GONE) {
+            selectLocationExpanded.setVisibility(View.VISIBLE);
+            expansionIcon.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24);
+        } else {
+            selectLocationExpanded.setVisibility(View.GONE);
+            expansionIcon.setImageResource(R.drawable.ic_baseline_keyboard_arrow_right_24);
+        }
     }
 
     private void setInputTypeListener() {
@@ -162,6 +178,7 @@ public class WeatherFragment extends Fragment {
             viewModel.setLocation(addressInputView.getText().toString());
             ((InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             addressInputView.clearFocus();
+            toggleLocationExpanded();
             return true;
         });
         latitude.setOnEditorActionListener((textView, i, keyEvent) -> {
@@ -169,12 +186,14 @@ public class WeatherFragment extends Fragment {
             viewModel.setLocation(Float.parseFloat(latitude.getText().toString()), Float.parseFloat(longitude.getText().toString()));
             ((InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             latitude.clearFocus();
+            toggleLocationExpanded();
             return true;
         });
         longitude.setOnEditorActionListener((textView, i, keyEvent) -> {
             viewModel.setLocation(Float.parseFloat(latitude.getText().toString()), Float.parseFloat(longitude.getText().toString()));
             ((InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             longitude.clearFocus();
+            toggleLocationExpanded();
             return true;
         });
     }

@@ -30,4 +30,8 @@ public class Details {
     public double getLon() {
         return lon;
     }
-}
+
+    public String getTimezone() {
+        return timezone;
+    }
+ }
