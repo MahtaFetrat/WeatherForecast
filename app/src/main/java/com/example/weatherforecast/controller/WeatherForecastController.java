@@ -108,12 +108,18 @@ public class WeatherForecastController {
         });
     }
 
-    public void parseCityResponse(Response response, OkHttpClient client, Gson gson, WeatherViewModel viewModel) throws IOException {
-        JsonObject cities = JsonParser.parseString(response.body().string()).getAsJsonObject();
-        JsonArray jsonArray = (JsonArray) cities.get("features");
-        City city = gson.fromJson(jsonArray.get(0), City.class);
-        ArrayList<Float> coordinates = city.geometry.coordinates;
-        getDetails(coordinates.get(0), coordinates.get(1), client, gson, viewModel);
+    public void parseCityResponse(Response response, OkHttpClient client, Gson gson, WeatherViewModel viewModel) {
+
+        JsonObject cities = null;
+        try {
+            cities = JsonParser.parseString(response.body().string()).getAsJsonObject();
+            JsonArray jsonArray = (JsonArray) cities.get("features");
+            City city = gson.fromJson(jsonArray.get(0), City.class);
+            ArrayList<Float> coordinates = city.geometry.coordinates;
+            getDetails(coordinates.get(0), coordinates.get(1), client, gson, viewModel);
+        } catch (Exception e) {
+            viewModel.reportInvalidLocation();
+        }
     }
 
     public String getCityUrl(String cityName) {
@@ -132,7 +138,7 @@ public class WeatherForecastController {
 
     public Request getCityCacheRequest(String cityName) {
         return new Request.Builder()
-                .cacheControl(new CacheControl.Builder().onlyIfCached().maxAge(12, TimeUnit.HOURS).build())
+                .cacheControl(new CacheControl.Builder().onlyIfCached().maxStale(12, TimeUnit.HOURS).build())
                 .url(getCityUrl(cityName)).build();
     }
 }
